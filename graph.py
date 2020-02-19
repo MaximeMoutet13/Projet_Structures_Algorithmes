@@ -1,3 +1,9 @@
+import networkx as nx
+import numpy as np
+import matplotlib.pyplot as plt
+import heapq
+
+
 class DirectedGraph:
     def __init__(self, edges):
         self.edges = edges
@@ -61,6 +67,48 @@ class DirectedGraph:
             l = "empty graph"
         return l
 
+    def to_networkx(self):
+        d = self.edges
+        return nx.Graph(d, create_using=nx.DiGraph)
+
+    def Dijsktra(self, u):
+        F = set(self.edges)
+        dist = [0 for j in range(len(self.edges))]
+        for i in range(len(self.edges)):
+            dist[i] = float("inf")
+        dist[u] = 0
+
+        while len(F) != 0:
+
+            min = float("inf")
+            s = 0
+            for x in F:
+                if dist[x] < min:
+                    min = dist[x]
+                    s = x
+            u = s
+            F.remove(u)
+            S = set(self.edges[u])
+            for x in S.intersection(F):
+                if dist[u] + self.edges[u][x] < dist[x]:
+                    dist[x] = dist[u] + self.edges[u][x]
+        return dist
+
+    # def Dijkstra_binary_heap(self, u):
+    #     F = set(self.edges)
+    #     queue = []
+    #     for x in range(len(self.edges)):
+    #         if x != u:
+    #             heapq.heappush(queue, (float("inf"), x))
+    #     heapq.heappush(queue, (0, u))
+    #     while len(F) != 0:
+    #         d, u = heapq.heappop(queue)
+    #         F.remove(u)
+    #         S = set(self.edges[u])
+    #
+    #         for x in S.intersection(F):
+    #             if d + self.edges[u][x] <
+
 
 class UndirectedGraph(DirectedGraph):
     def __int__(self, edge):
@@ -72,12 +120,12 @@ class UndirectedGraph(DirectedGraph):
         if vertex2 not in self.vertices:
             self.add_vertex(vertex2)
 
-        self.vertices[vertex1][vertex2] = weight
-        self.vertices[vertex2][vertex1] = weight
+        self.edges[vertex1][vertex2] = weight
+        self.edges[vertex2][vertex1] = weight
 
-    def remove_edge(self, vertex1, verxtex2):
-        del self.edges[vertex1][verxtex2]
-        del self.edges[vertex1][verxtex2]
+    def remove_edge(self, vertex1, vertex2):
+        del self.edges[vertex1][vertex2]
+        del self.edges[vertex1][vertex2]
 
     def change_weight(self, v1, v2, w):
         self.edges[v1][v2] = w
