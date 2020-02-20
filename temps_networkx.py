@@ -1,7 +1,7 @@
 from graph_generation import*
 from time import process_time, perf_counter
 
-n_range = 2 ** np.arange(2, 13)
+n_range = 2 ** np.arange(2, 10)
 
 t = np.empty(n_range.size)
 for i, n in enumerate(n_range):
@@ -18,4 +18,5 @@ plt.ylabel("temps (s)")
 plt.xscale("log")
 plt.yscale("log")
 plt.grid(True)
+plt.title("Compute shortest path with networkx")
 plt.savefig("test2.png")

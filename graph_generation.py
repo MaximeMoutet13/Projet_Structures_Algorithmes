@@ -48,11 +48,28 @@ def generate_random_graph(n_nodes, n_edges, directed=False):
     return G
 
 
-# def generate_random_community_graph(n_nodes_per_community, p_intra, p_inter):
-#     nb_community = len(n_nodes_per_community)
-#
-#     g = []
-#     for c in range(nb_community):
-#         for n in range(n_nodes_per_community[c]):
+def generate_random_community_graph(n_nodes_per_community, p_intra, p_inter):
+    nb_community = len(n_nodes_per_community)
+    g = []
+    for i, x in enumerate(n_nodes_per_community):
+        G = DirectedGraph.empty_graph()
+        for j in range(x):
+            G.add_vertex(int(j + np.sum(n_nodes_per_community[:i])))
+        g.append(G)
+
+    for i, J in enumerate(g):
+        for s1 in range(len(J.vertices)):
+            for s2 in range(len(J.vertices)):
+                if s1 != s2:
+                    p = random.random()
+                    print(len(J[s2]))
+                    if len(J[s2]) == 0:
+                        if p > p_intra:
+                            J.add_edge(s1, s2, 1)
+                    else:
+                        if p > p_intra and s1 not in J[s2]:
+                            J.add_edge(s1, s2, 1)
+        print(J.edges)
 
 
+generate_random_community_graph([1, 4, 3, 2, 5], 0.5, 0)

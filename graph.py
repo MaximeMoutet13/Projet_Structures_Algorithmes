@@ -9,6 +9,15 @@ class DirectedGraph:
         self.edges = edges
 
     @property
+    def edges(self):
+        return self.__edges
+
+    @edges.setter
+    def edges(self, d):
+        if type(d) == dict:
+            self.__edges = d
+
+    @property
     def vertices(self):
         return self.edges.keys()
 
@@ -20,10 +29,12 @@ class DirectedGraph:
         self.edges[v] = {}
 
     def remove_vertex(self, v):
+        for s in self:
+            try:
+                del s[v]
+            except KeyError:
+                pass
         del self.edges[v]
-        for x in self.edges.values:
-            if v in x:
-                del x[v]
 
     def add_edge(self, v1, v2, weight):
         if v1 not in self.edges:
@@ -33,7 +44,10 @@ class DirectedGraph:
         self.edges[v1][v2] = weight
 
     def remove_edge(self, v1, v2):
-        del self.edges[v1][v2]
+        try:
+            del self.edges[v1][v2]
+        except KeyError:
+            pass
 
     def change_weight(self, v1, v2, w):
         self.edges[v1][v2] = w
@@ -46,8 +60,8 @@ class DirectedGraph:
         e = dict()
         for i, x in enumerate(vertices):
             e[x] = G.edges[x]
-        G.edges = e
-        return G
+        G2.edges = e
+        return G2
 
     def __len__(self):
         return len(self.edges)
@@ -124,9 +138,24 @@ class UndirectedGraph(DirectedGraph):
         self.edges[vertex2][vertex1] = weight
 
     def remove_edge(self, vertex1, vertex2):
-        del self.edges[vertex1][vertex2]
-        del self.edges[vertex1][vertex2]
+        try:
+            del self.edges[vertex1][vertex2]
+            del self.edges[vertex1][vertex2]
+        except KeyError:
+            pass
 
     def change_weight(self, v1, v2, w):
         self.edges[v1][v2] = w
         self.edges[v2][v1] = w
+
+    def __str__(self):
+        l = "V = "
+        V = list(self.vertices)
+        l += str(V)
+        l += "     E = "
+        E = []
+        for x in self.edges:
+            for y in self.edges[x]:
+                E += [[x, y, self.edges[x][y]]]
+        l += str(E)
+        return l
