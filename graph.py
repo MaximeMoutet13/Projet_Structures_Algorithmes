@@ -14,7 +14,11 @@ class DirectedGraph:
 
     @edges.setter
     def edges(self, d):
-        if type(d) == dict:
+        if isinstance(d, dict):
+            for v in d.values():
+                for w in v.values():
+                    if w <= 0:
+                        raise ValueError
             self.__edges = d
 
     @property
@@ -88,6 +92,7 @@ class DirectedGraph:
     def Dijsktra(self, u):
         F = set(self.edges)
         dist = [float("inf") for j in range(len(self.edges))]
+        pred = [None for j in range(len(self.edges))]
         dist[u] = 0
         while len(F) != 0:
             min = float("inf")
@@ -102,7 +107,17 @@ class DirectedGraph:
             for x in S.intersection(F):
                 if dist[u] + self.edges[u][x] < dist[x]:
                     dist[x] = dist[u] + self.edges[u][x]
-        return dist
+                    pred[x] = u
+        return dist, pred
+
+    @staticmethod
+    def getPath(pred, t):
+        path = []
+        u = t
+        while pred[u] != None:
+            path = [u] + path
+            u = pred[u]
+        return path
 
     def Dijkstra_binary_heap(self, u):
         F = set(self.edges)
@@ -122,6 +137,25 @@ class DirectedGraph:
                     dist[x] = dist[u] + self.edges[u][x]
                     heapq.heappush(queue, (dist[x], x))
         return dist
+
+    def Dijkstra_from_u_to_v(self, u, v):
+        F = set(self.edges)
+        queue = []
+        dist = [float("inf") for j in range(len(self.edges))]
+        dist[u] = 0
+        for x in range(len(self.edges)):
+            if x != u:
+                heapq.heappush(queue, (float("inf"), x))
+        heapq.heappush(queue, (0, u))
+        while u != v:
+            d, u = heapq.heappop(queue)
+            F.discard(u)
+            S = set(self.edges[u])
+            for x in S.intersection(F):
+                if d + self.edges[u][x] < dist[x]:
+                    dist[x] = dist[u] + self.edges[u][x]
+                    heapq.heappush(queue, (dist[x], x))
+        return dist[v]
 
 
 class UndirectedGraph(DirectedGraph):

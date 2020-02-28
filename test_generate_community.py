@@ -32,7 +32,7 @@ def set_colors(n_nodes_per_community):
     return D
 
 
-nodes_per_community = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+nodes_per_community = [5, 5, 5, 5]
 J = generate_random_community_graph(nodes_per_community, 0.9, 0.05)
 G = J.to_networkx()
 Gcolors = set_colors(nodes_per_community)
