@@ -18,7 +18,7 @@ class TestDijkstra(unittest.TestCase):
         value0 = l == dist0
         self.assertEqual(value0, True)
 
-        dist1 = G.Dijkstra_binary_heap(0)
+        dist1, pred1 = G.Dijkstra_binary_heap(0)
         value1 = l == dist1
         self.assertEqual(value1, True)
 
@@ -32,7 +32,7 @@ class TestDijkstra(unittest.TestCase):
     def testDijkstraNonConnexe(self):
         G = self.G2
         dist0_0, pred0_0 = G.Dijsktra(0)
-        dist0_1 = G.Dijkstra_binary_heap(0)
+        dist0_1, pred0_1 = G.Dijkstra_binary_heap(0)
         l0 = [0, 8, float("inf"), 5, 7]
         value0_0 = l0 == dist0_0
         value0_1 = l0 == dist0_1
@@ -40,7 +40,7 @@ class TestDijkstra(unittest.TestCase):
         self.assertEqual(value0_1, True)
 
         dist1_0, pred1_0 = G.Dijsktra(2)
-        dist1_1 = G.Dijkstra_binary_heap(2)
+        dist1_1, pred1_1 = G.Dijkstra_binary_heap(2)
         l1 = [float("inf"), float("inf"), 0, float("inf"), float("inf")]
         value1_0 = l1 == dist1_0
         value1_1 = l1 == dist1_1
@@ -48,7 +48,7 @@ class TestDijkstra(unittest.TestCase):
         self.assertEqual(value1_1, True)
 
     def testDijkstraFromUtoV(self):
-        G = self.G2
-        d = G.Dijkstra_from_u_to_v(0, 2)
+        G = self.G1
+        d, p = G.Dijkstra_from_u_to_v(0, 2)
         value = d == 9
         self.assertEqual(value, True)

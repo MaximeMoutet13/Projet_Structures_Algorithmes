@@ -57,7 +57,7 @@ def generate_random_community_graph(n_nodes_per_community, p_intra, p_inter):
             G.add_vertex(int(j + np.sum(n_nodes_per_community[:i])))
         g.append(G)
 
-    J = DirectedGraph.empty_graph()
+    J = UndirectedGraph.empty_graph()
 
     for i in range(nb_nodes):
         J.add_vertex(i)

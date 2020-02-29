@@ -111,7 +111,7 @@ class DirectedGraph:
         return dist, pred
 
     @staticmethod
-    def getPath(pred, t):
+    def DijkstraPath(pred, t):
         path = []
         u = t
         while pred[u] != None:
@@ -123,6 +123,7 @@ class DirectedGraph:
         F = set(self.edges)
         queue = []
         dist = [float("inf") for j in range(len(self.edges))]
+        pred = [None for j in range(len(self.edges))]
         dist[u] = 0
         for x in range(len(self.edges)):
             if x != u:
@@ -136,12 +137,14 @@ class DirectedGraph:
                 if d + self.edges[u][x] < dist[x]:
                     dist[x] = dist[u] + self.edges[u][x]
                     heapq.heappush(queue, (dist[x], x))
-        return dist
+                    pred[x] = u
+        return dist, pred
 
     def Dijkstra_from_u_to_v(self, u, v):
         F = set(self.edges)
         queue = []
         dist = [float("inf") for j in range(len(self.edges))]
+        pred = [None for j in range(len(self.edges))]
         dist[u] = 0
         for x in range(len(self.edges)):
             if x != u:
@@ -155,7 +158,8 @@ class DirectedGraph:
                 if d + self.edges[u][x] < dist[x]:
                     dist[x] = dist[u] + self.edges[u][x]
                     heapq.heappush(queue, (dist[x], x))
-        return dist[v]
+                    pred[x] = u
+        return dist[v], pred
 
 
 class UndirectedGraph(DirectedGraph):
