@@ -22,8 +22,10 @@ plt.ylabel("temps (s)")
 plt.xscale("log")
 plt.yscale("log")
 plt.grid(True)
+
+# Renommer le fichier !!!
 plt.title("Compute shortest path with Dijkstra")
-# plt.savefig("temps_Dijkstra_binary_heap.png")
+# plt.savefig("imTemps_DijkstraBinaryHeap.png")
 
 
 plt.figure()
@@ -33,5 +35,7 @@ plt.ylabel("temps (s)")
 plt.xscale("log")
 plt.yscale("log")
 plt.grid(True)
+
+# Renommer le fichier !!!
 plt.title("Generate random graph with 0.1 * max_edges with second method")
-plt.savefig("imTemps_generate2.png")
+# plt.savefig("imTemps_generate2.png")

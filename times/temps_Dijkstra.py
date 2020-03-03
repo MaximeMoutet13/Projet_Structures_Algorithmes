@@ -5,22 +5,26 @@ __date__ = "20/02/2020"
 from sources.graph_generation import *
 from time import process_time
 
-n_range = 2 ** np.arange(2, 16)
-
-t = np.empty(n_range.size)
-for i, n in enumerate(n_range):
-    G = generate_random_graph(n, n * (n - 1) / 2)
+n = [i * 1000 for i in range(1, 11)]
+edges_percent = 0.1
+t = []
+for i, v in enumerate(n):
+    print("Etape i:", i)
+    G = generate_random_graph(v, edges_percent * v * (v - 1) / 2, directed=False)
     t0 = process_time()
     G.Dijsktra(0)
     t1 = process_time()
-    t[i] = t1 - t0
+    t.append(t1 - t0)
 
 
-plt.plot(n_range, t)
+plt.plot(n, t)
 plt.xlabel("nb de sommets $n$")
 plt.ylabel("temps (s)")
 plt.xscale("log")
 plt.yscale("log")
 plt.grid(True)
-plt.title("Compute shortest path with Dijkstra")
-plt.savefig("Temps Dijkstra.png")
+
+
+# Renommer le fichier !!!
+plt.title("Dijkstra, 0.1 * max_edges")
+plt.savefig("imTemps_Dijkstra.png")

@@ -1,7 +1,3 @@
-__author__ = "maxime"
-__file__ = "graph_generation.py.py"
-__date__ = "19/02/20"
-
 import random
 from sources.graph import *
 
