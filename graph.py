@@ -120,7 +120,7 @@ class DirectedGraph:
         return path
 
     def Dijkstra_binary_heap(self, u):
-        F = set(self.edges)
+        F = set(self.vertices)
         queue = []
         dist = [float("inf") for j in range(len(self.edges))]
         pred = [None for j in range(len(self.edges))]
