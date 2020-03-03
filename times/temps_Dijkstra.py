@@ -2,8 +2,8 @@ __author__ = "maxime"
 __file__ = "temps_Dijkstra.py"
 __date__ = "20/02/2020"
 
-from graph_generation import *
-from time import process_time, perf_counter
+from sources.graph_generation import *
+from time import process_time
 
 n_range = 2 ** np.arange(2, 16)
 

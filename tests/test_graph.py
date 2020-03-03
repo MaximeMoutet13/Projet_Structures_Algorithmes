@@ -1,4 +1,4 @@
-from graph import *
+from sources.graph import *
 import unittest
 
 

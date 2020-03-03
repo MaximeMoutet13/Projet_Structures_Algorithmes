@@ -1,4 +1,4 @@
-from graph import DirectedGraph
+from sources.graph import DirectedGraph
 
 
 def read_file(file_name):

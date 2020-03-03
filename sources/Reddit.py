@@ -1,8 +1,3 @@
-
-from parser import *
-from graph import *
-
-
 redditGraph = create_graph("/home/aillet/Bureau/Infromatique/Projet_Structures_Algorithmes/soc-redditHyperlinks-title.tsv")
 
 def  top10(subreddit):

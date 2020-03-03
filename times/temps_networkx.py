@@ -1,5 +1,5 @@
-from graph_generation import*
-from time import process_time, perf_counter
+from sources.graph_generation import*
+from time import process_time
 
 n_range = 2 ** np.arange(2, 10)
 

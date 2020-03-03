@@ -3,46 +3,7 @@ __file__ = "graph_generation.py.py"
 __date__ = "19/02/20"
 
 import random
-from graph import *
-
-
-# def generate_random_graph(n_nodes, n_edges, directed=False):
-#     if n_edges < n_nodes - 1:
-#         raise ValueError
-#     if n_nodes == 0:
-#         return dict()
-#     if directed:
-#         if n_edges > n_nodes * (n_nodes - 1):
-#             raise ValueError
-#     else:
-#         if n_edges > n_nodes * (n_nodes - 1) / 2:
-#             raise ValueError
-#
-#     if directed:
-#         G = DirectedGraph.empty_graph()
-#     else:
-#         G = UndirectedGraph.empty_graph()
-#
-#     e = 0
-#     G.add_vertex(0)
-#     for i in range(1, n_nodes):
-#         G.add_vertex(i)
-#         k = random.randint(0, i - 1)
-#         G.add_edge(i, k, 1)
-#         e += 1
-#
-#     S = set(G.vertices)
-#     while e != n_edges:
-#         k1 = random.randint(0, n_nodes - 1)
-#         S2 = set(G[k1])
-#         S2.add(k1)
-#         Dir = S.difference(S2)
-#         if len(Dir) == 0:
-#             break
-#         k2 = random.sample(Dir, 1)[0]
-#         G.add_edge(k1, k2, 1)
-#         e += 1
-#     return G
+from sources.graph import *
 
 
 def generate_random_graph(n_nodes, n_edges, directed=False):
@@ -87,6 +48,45 @@ def generate_random_graph(n_nodes, n_edges, directed=False):
     return G
 
 
+def generate_random_graph_2(n_nodes, n_edges, directed=False):
+    if n_edges < n_nodes - 1:
+        raise ValueError
+    if n_nodes == 0:
+        return dict()
+    if directed:
+        if n_edges > n_nodes * (n_nodes - 1):
+            raise ValueError
+    else:
+        if n_edges > n_nodes * (n_nodes - 1) / 2:
+            raise ValueError
+
+    if directed:
+        G = DirectedGraph.empty_graph()
+    else:
+        G = UndirectedGraph.empty_graph()
+
+    e = 0
+    G.add_vertex(0)
+    for i in range(1, n_nodes):
+        G.add_vertex(i)
+        k = random.randint(0, i - 1)
+        G.add_edge(i, k, 1)
+        e += 1
+
+    S = set(G.vertices)
+    while e != n_edges:
+        k1 = random.randint(0, n_nodes - 1)
+        S2 = set(G[k1])
+        S2.add(k1)
+        Dir = S.difference(S2)
+        if len(Dir) == 0:
+            break
+        k2 = random.sample(Dir, 1)[0]
+        G.add_edge(k1, k2, 1)
+        e += 1
+    return G
+
+
 def generate_random_community_graph(n_nodes_per_community, p_intra, p_inter):
     nb_nodes = int(np.sum(n_nodes_per_community))
     g = []
@@ -101,10 +101,11 @@ def generate_random_community_graph(n_nodes_per_community, p_intra, p_inter):
     for i in range(nb_nodes):
         J.add_vertex(i)
 
+    Visited = set()
     for G in g:
         for s in G:
             for s2 in range(nb_nodes):
-                if s2 != s:
+                if s2 != s and s2 not in Visited:
                     k = random.random()
                     if s2 in G.edges:
                         if k < p_intra:
@@ -112,4 +113,5 @@ def generate_random_community_graph(n_nodes_per_community, p_intra, p_inter):
                     else:
                         if k < p_inter:
                             J.add_edge(s, s2, 1)
+            Visited.add(s)
     return J

@@ -1,4 +1,4 @@
-from graph_generation import *
+from sources.graph_generation import *
 import unittest
 
 
@@ -14,7 +14,7 @@ class TestDijkstra(unittest.TestCase):
     def testDijkstra(self):
         G = self.G1
         dist0, pred0 = G.Dijsktra(0)
-        l = [0, 8, 9, 5, 7]
+        l = {0: 0, 1: 8, 2: 9, 3: 5, 4: 7}
         value0 = l == dist0
         self.assertEqual(value0, True)
 
@@ -33,7 +33,7 @@ class TestDijkstra(unittest.TestCase):
         G = self.G2
         dist0_0, pred0_0 = G.Dijsktra(0)
         dist0_1, pred0_1 = G.Dijkstra_binary_heap(0)
-        l0 = [0, 8, float("inf"), 5, 7]
+        l0 = {0: 0, 1: 8, 2: float("inf"), 3: 5, 4: 7}
         value0_0 = l0 == dist0_0
         value0_1 = l0 == dist0_1
         self.assertEqual(value0_0, True)
@@ -41,7 +41,7 @@ class TestDijkstra(unittest.TestCase):
 
         dist1_0, pred1_0 = G.Dijsktra(2)
         dist1_1, pred1_1 = G.Dijkstra_binary_heap(2)
-        l1 = [float("inf"), float("inf"), 0, float("inf"), float("inf")]
+        l1 = {0: float("inf"), 1: float("inf"), 2: 0, 3: float("inf"), 4: float("inf")}
         value1_0 = l1 == dist1_0
         value1_1 = l1 == dist1_1
         self.assertEqual(value1_0, True)
