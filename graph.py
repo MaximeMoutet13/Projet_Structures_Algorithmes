@@ -91,8 +91,11 @@ class DirectedGraph:
 
     def Dijsktra(self, u):
         F = set(self.edges)
-        dist = [float("inf") for j in range(len(self.edges))]
-        pred = [None for j in range(len(self.edges))]
+        dist = dict()
+        pred = dict()
+        for i in self:
+            dist[i] = float('inf')
+            pred[i] = None
         dist[u] = 0
         while len(F) != 0:
             min = float("inf")
@@ -122,8 +125,11 @@ class DirectedGraph:
     def Dijkstra_binary_heap(self, u):
         F = set(self.vertices)
         queue = []
-        dist = [float("inf") for j in range(len(self.edges))]
-        pred = [None for j in range(len(self.edges))]
+        dist = dict()
+        pred = dict()
+        for i in self:
+            dist[i] = float('inf')
+            pred[i] = None
         dist[u] = 0
         for x in range(len(self.edges)):
             if x != u:

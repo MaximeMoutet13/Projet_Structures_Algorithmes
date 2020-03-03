@@ -5,7 +5,7 @@ __date__ = "20/02/2020"
 from graph_generation import *
 from time import process_time, perf_counter
 
-n_range = 2 ** np.arange(2, 10)
+n_range = 2 ** np.arange(2, 16)
 
 t = np.empty(n_range.size)
 for i, n in enumerate(n_range):
@@ -23,4 +23,4 @@ plt.xscale("log")
 plt.yscale("log")
 plt.grid(True)
 plt.title("Compute shortest path with Dijkstra")
-plt.savefig("test2.png")
+plt.savefig("Temps Dijkstra.png")
