@@ -31,13 +31,17 @@ def generate_random_graph(n_nodes, n_edges, directed=False):
         G.add_edge(i, k, 1)
         e += 1
 
+    S = set(G.vertices)
     while e != n_edges:
         k1 = random.randint(0, n_nodes - 1)
-        k2 = random.randint(0, n_nodes - 1)
-        if k1 != k2:
-            if k2 not in G[k1]:
-                G.add_edge(k1, k2, 1)
-                e += 1
+        S2 = set(G[k1])
+        S2.add(k1)
+        Dir = S.difference(S2)
+        if len(Dir) == 0:
+            break
+        k2 = random.sample(Dir, 1)[0]
+        G.add_edge(k1, k2, 1)
+        e += 1
     return G
 
 
