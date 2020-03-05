@@ -2,7 +2,7 @@ from sources.graph_generation import *
 from time import process_time
 
 n = [i * 1000 for i in range(1, 11)]
-edges_percent = 0.2
+edges_percent = 0.3
 t_Dijkstra = []
 t_binary_heap = []
 t_networkx = []
@@ -10,7 +10,7 @@ t_networkx = []
 
 for i, v in enumerate(n):
     print("Etape i:", i)
-    G = generate_random_graph(v, edges_percent * v * (v - 1) / 2, directed=False)
+    G = generate_random_graph(v, edges_percent * v ** 2, directed=True)
     t0 = process_time()
     G.Dijsktra(0)
     t1 = process_time()
@@ -31,14 +31,12 @@ for i, v in enumerate(n):
 plt.plot(n, t_Dijkstra, label="Dijkstra")
 plt.plot(n, t_binary_heap, label="Binary heaps")
 plt.plot(n, t_networkx, label="Networkx")
-plt.xlabel("nb de sommets $n$")
-plt.ylabel("temps (s)")
-plt.xscale("log")
-plt.yscale("log")
+plt.xlabel("nb de sommets $n$", fontsize=20)
+plt.ylabel("Temps (s)", fontsize=20)
 plt.grid(True)
 plt.legend()
 
 
 # Renommer le fichier !!!
-plt.title("Dijkstra, 0.2 * max_edges")
-plt.savefig("imTemps_all_Dijkstra.png")
+plt.title(r"Dijkstra, edges=0.3n^2")
+plt.savefig(nsoqm)

@@ -22,6 +22,12 @@ class TestDijkstra(unittest.TestCase):
         value1 = l == dist1
         self.assertEqual(value1, True)
 
+        J = G.to_networkx()
+        dist2 = nx.shortest_path_length(J, 0)
+        print(dist2)
+        value2 = l == dist2
+        self.assertEqual(value2, True)
+
     def testDijkstraEmpty(self):
         G = self.emptygraph
         try:
