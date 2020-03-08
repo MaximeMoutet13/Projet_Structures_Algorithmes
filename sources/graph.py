@@ -3,9 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import heapq
 import sys
+from copy import copy, deepcopy
 
 
 class DirectedGraph:
+    """
+        class of directed graphs
+    """
+
     def __init__(self, edges):
         self.edges = edges
 
@@ -34,6 +39,9 @@ class DirectedGraph:
         self.edges[v] = {}
 
     def remove_vertex(self, v):
+        """
+            remove the vertex v and it edges in the graph self
+        """
         for s in self:
             try:
                 del s[v]
@@ -42,6 +50,11 @@ class DirectedGraph:
         del self.edges[v]
 
     def add_edge(self, v1, v2, weight):
+        """
+            add the edge between the vertices v1 and v2. If the vertices don't exist, add them to the graph
+        """
+        if weight <= 0:
+            raise ValueError
         if v1 not in self.edges:
             self.add_vertex(v1)
         if v2 not in self.edges:
@@ -49,15 +62,24 @@ class DirectedGraph:
         self.edges[v1][v2] = weight
 
     def remove_edge(self, v1, v2):
+        """
+            remove the edge between v1 and v2. If the edge doesn't exist, pass
+        """
         try:
             del self.edges[v1][v2]
         except KeyError:
             pass
 
     def change_weight(self, v1, v2, w):
+        """
+            change the weight of the edge (v1, v2)
+        """
         self.edges[v1][v2] = w
 
     def reset(self):
+        """
+            delete all edges and vertices
+        """
         self.edges = {}
 
     def graph_induit(self, G, vertices):
@@ -87,10 +109,17 @@ class DirectedGraph:
         return l
 
     def to_networkx(self):
+        """
+            create a networkx graph from the graph self
+        """
         d = self.edges
         return nx.Graph(d, create_using=nx.DiGraph)
 
-    def Dijsktra(self, u):
+    def Dijkstra(self, u):
+        """
+            compute Dijkstra algorithm from the vertex u to each vertex of the graph
+            returns the lengths and the predecessors
+        """
         F = set(self.edges)
         dist = dict()
         pred = dict()
@@ -116,6 +145,9 @@ class DirectedGraph:
 
     @staticmethod
     def DijkstraPath(pred, t):
+        """
+            returns the path from the Dijkstra algorithm to t
+        """
         path = []
         u = t
         while pred[u] != None:
@@ -124,6 +156,9 @@ class DirectedGraph:
         return path
 
     def Dijkstra_binary_heap(self, u):
+        """
+            Compute Dijkstra algorithm using binary heaps
+        """
         F = set(self.vertices)
         queue = []
         dist = dict()
@@ -148,6 +183,9 @@ class DirectedGraph:
         return dist, pred
 
     def Dijkstra_from_u_to_v(self, u, v):
+        """
+            Compute Dijkstra from u to v with binary heaps
+        """
         F = set(self.edges)
         queue = []
         dist = [float("inf") for j in range(len(self.edges))]
@@ -170,6 +208,10 @@ class DirectedGraph:
 
 
 class UndirectedGraph(DirectedGraph):
+    """
+        Class of undirected graphs
+    """
+
     def __int__(self, edge):
         super().__init__(edge)
 
@@ -204,3 +246,27 @@ class UndirectedGraph(DirectedGraph):
                 E += [[x, y, self.edges[x][y]]]
         l += str(E)
         return l
+
+    def Bellman_Ford(self, u):
+        """
+            Compute Bellman Ford algorithm
+        """
+        S = self.edges
+        opt = dict()
+        for s in S.keys():
+            if s != u:
+                opt[s] = float("inf")
+            else:
+                opt[s] = 0
+
+        for i in range(1, len(S) - 1):
+            for v in S.keys():
+                a = copy(opt[v])
+                N = set(S[v])
+                minus = float("inf")
+                for v2 in N:
+                    if S[v2][v] + opt[v2] <= minus:
+                        minus = S[v2][v] + opt[v2]
+
+                opt[v] = min(a, minus)
+        return opt

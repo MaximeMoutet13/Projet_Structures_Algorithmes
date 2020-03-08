@@ -7,12 +7,15 @@ t_Dijkstra = []
 t_binary_heap = []
 t_networkx = []
 
+# nous avons décidé de ne pas inclure l'algorithme de Bellman Ford qui semblaient etre très long
+# meme pour des "petits" graphes
+
 
 for i, v in enumerate(n):
     print("Etape i:", i)
     G = generate_random_graph(v, edges_percent * v ** 2, directed=True)
     t0 = process_time()
-    G.Dijsktra(0)
+    G.Dijkstra(0)
     t1 = process_time()
     t_Dijkstra.append(t1 - t0)
 

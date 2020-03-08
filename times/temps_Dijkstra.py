@@ -12,7 +12,7 @@ for i, v in enumerate(n):
     print("Etape i:", i)
     G = generate_random_graph(v, edges_percent * v * (v - 1) / 2, directed=False)
     t0 = process_time()
-    G.Dijsktra(0)
+    G.Dijkstra(0)
     t1 = process_time()
     t.append(t1 - t0)
 
