@@ -3,6 +3,9 @@ from sources.graph import *
 
 
 def generate_random_graph(n_nodes, n_edges, directed=False):
+    """
+        Generate a random connected graph
+    """
     if n_edges < n_nodes - 1:
         raise ValueError
     if n_nodes == 0:
@@ -45,6 +48,9 @@ def generate_random_graph(n_nodes, n_edges, directed=False):
 
 
 def generate_random_graph_2(n_nodes, n_edges, directed=False):
+    """
+        Generate a random connected graph using an other method, but this one is too long to be used
+    """
     if n_edges < n_nodes - 1:
         raise ValueError
     if n_nodes == 0:
@@ -84,6 +90,9 @@ def generate_random_graph_2(n_nodes, n_edges, directed=False):
 
 
 def generate_random_community_graph(n_nodes_per_community, p_intra, p_inter):
+    """
+        Generate a random community graph
+    """
     nb_nodes = int(np.sum(n_nodes_per_community))
     g = []
     for i, x in enumerate(n_nodes_per_community):
