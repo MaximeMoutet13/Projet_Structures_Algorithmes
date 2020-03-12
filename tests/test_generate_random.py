@@ -26,8 +26,8 @@ class TestGenerateGraph(unittest.TestCase):
             edges1 += len(G1[x])
         value1_0 = vertices1 == 5
         value1_1 = edges1 / 2 == 4
-        # self.assertEqual(value1_0, True)
-        # self.assertEqual(value1_1, True)
+        self.assertEqual(value1_0, True)
+        self.assertEqual(value1_1, True)
 
         vertices2 = len(G2)
         edges2 = 0
@@ -35,5 +35,5 @@ class TestGenerateGraph(unittest.TestCase):
             edges2 += len(G2[x])
         value2_0 = vertices2 == 200
         value2_1 = edges2 / 2 == 19900
-        # self.assertEqual(value2_0, True)
-        # self.assertEqual(value2_1, True)
+        self.assertEqual(value2_0, True)
+        self.assertEqual(value2_1, True)

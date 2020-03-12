@@ -71,13 +71,13 @@ def generate_random_graph_2(n_nodes, n_edges, directed=False):
     G.add_vertex(0)
     for i in range(1, n_nodes):
         G.add_vertex(i)
-        k = random.randint(0, i - 1)
+        k = np.floor((random.random() * (i - 1)))
         G.add_edge(i, k, 1)
         e += 1
 
     S = set(G.vertices)
     while e != n_edges:
-        k1 = random.randint(0, n_nodes - 1)
+        k1 = np.floor(random.random() * (n_nodes - 1))
         S2 = set(G[k1])
         S2.add(k1)
         Dir = S.difference(S2)

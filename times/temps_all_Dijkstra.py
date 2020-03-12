@@ -2,7 +2,7 @@ from sources.graph_generation import *
 from time import process_time
 
 n = [i * 1000 for i in range(1, 11)]
-edges_percent = 0.3
+edges_percent = 0.2
 t_Dijkstra = []
 t_binary_heap = []
 t_networkx = []
@@ -26,7 +26,7 @@ for i, v in enumerate(n):
 
     J = G.to_networkx()
     t4 = process_time()
-    nx.shortest_path_length(J, 0)
+    nx.shortest_path_length(J, source=0)
     t5 = process_time()
     t_networkx.append(t5 - t4)
 
@@ -42,4 +42,4 @@ plt.legend()
 
 # Renommer le fichier !!!
 plt.title(r"Dijkstra, edges=0.3n^2")
-plt.savefig(nsoqm)
+plt.savefig("temps_all_dijkstra.png")

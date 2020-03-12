@@ -148,7 +148,7 @@ class DirectedGraph:
         """
             returns the path from the Dijkstra algorithm to t
         """
-        path = []
+        path = [t]
         u = t
         while pred[u] != None:
             path = [u] + path
