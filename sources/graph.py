@@ -188,8 +188,11 @@ class DirectedGraph:
         """
         F = set(self.edges)
         queue = []
-        dist = [float("inf") for j in range(len(self.edges))]
-        pred = [None for j in range(len(self.edges))]
+        dist = dict()
+        pred = dict()
+        for i in self:
+            dist[i] = float('inf')
+            pred[i] = None
         dist[u] = 0
         for x in range(len(self.edges)):
             if x != u:
