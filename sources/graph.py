@@ -230,7 +230,7 @@ class UndirectedGraph(DirectedGraph):
     def remove_edge(self, vertex1, vertex2):
         try:
             del self.edges[vertex1][vertex2]
-            del self.edges[vertex1][vertex2]
+            del self.edges[vertex2][vertex1]
         except KeyError:
             pass
 
