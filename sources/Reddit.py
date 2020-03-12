@@ -1,5 +1,10 @@
-redditGraph = create_graph(
-    "/home/aillet/Bureau/Infromatique/Projet_Structures_Algorithmes/soc-redditHyperlinks-title.tsv")
+from parser import *
+from graph import *
+
+
+
+
+redditGraph = create_graph("/home/aillet/Bureau/Infromatique/Projet_Structures_Algorithmes/soc-redditHyperlinks-title.tsv")
 
 
 def top10(subreddit):
@@ -52,6 +57,8 @@ def activity_Part_Two_Percent(subreddit):
 
 
 print(activity_Part_Two_Percent(redditGraph))
-un, deux = redditGraph.Dijkstra_binary_heap('disney')
-print(1)
-print(redditGraph.DijkstraPath(deux, 'vegan'))
+un, deux = redditGraph.Dijkstra_from_u_to_v('disney','vegan')
+print(redditGraph.DijkstraPath(deux,'vegan'))
+
+un,deux = redditGraph.Dijkstra_from_u_to_v('greenbaypackers','missouripolitics')
+print(redditGraph.DijkstraPath(deux,'missouripolitics'))
