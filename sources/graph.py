@@ -152,8 +152,7 @@ class DirectedGraph:
         while pred[u] != None:
             path = [u] + path
             u = pred[u]
-        path = [u] + path
-        return path
+        return [u] + path
 
     def Dijkstra_binary_heap(self, u):
         """
