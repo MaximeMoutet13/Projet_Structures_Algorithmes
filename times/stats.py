@@ -55,4 +55,4 @@ plt.legend()
 
 # Renommer le fichier !!!
 plt.title(r"Statistiques Dijkstra, $0.2*n^2$")
-plt.savefig("stats.png")
+plt.savefig("4-3.png")
