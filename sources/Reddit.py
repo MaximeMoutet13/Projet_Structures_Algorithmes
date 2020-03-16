@@ -15,7 +15,7 @@ def top10(subreddit):
     return nbr[:10]
 
 
-print(top10(redditGraph))
+
 
 
 def isolated(subreddit):
@@ -31,7 +31,6 @@ def isolated(subreddit):
     return isolated
 
 
-print(isolated((redditGraph)))
 
 
 def activity_Part_Two_Percent(subreddit):
@@ -54,11 +53,11 @@ def activity_Part_Two_Percent(subreddit):
 
     activityPartTwoPercent = (100 * nbr_links_two_percent) / nbr_links
     return activityPartTwoPercent
-
-
-print(activity_Part_Two_Percent(redditGraph))
+print('Les 10 subreddit ayant le plus de liens avec d\'autre subbreddit :',top10(redditGraph))
+print('Il y a ',isolated((redditGraph)), 'subreddit qui sont isolés.')
+print('La part des 2% de subreddit les plus actif est de',activity_Part_Two_Percent(redditGraph))
 un, deux = redditGraph.Dijkstra_from_u_to_v('disney','vegan')
-print(redditGraph.DijkstraPath(deux,'vegan'))
 
+print(redditGraph.DijkstraPath(deux,'vegan'))
 un,deux = redditGraph.Dijkstra_from_u_to_v('greenbaypackers','missouripolitics')
 print(redditGraph.DijkstraPath(deux,'missouripolitics'))
