@@ -11,6 +11,8 @@ t_Dijkstra = []
 t_binary_heap = []
 t_networkx = []
 
+# Renommer l'image enregistrée avant de lancer le programme !!
+
 # nous avons décidé de ne pas inclure l'algorithme de Bellman Ford qui semblaient etre très long
 # meme pour des "petits" graphes
 nb_sommet = 2000

@@ -11,6 +11,7 @@ t_networkx = []
 # meme pour des "petits" graphes
 
 
+# Renommer l'image et les axes avant de lancer le programme !!
 for i, v in enumerate(n):
     print("Etape i:", i)
     G = generate_random_graph(v, edges_percent * v ** 2, directed=True)

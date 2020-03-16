@@ -5,6 +5,8 @@ __date__ = "20/02/2020"
 from sources.graph_generation import *
 from time import process_time
 
+# Renommer l'image enregistrée avant de lancer le programme !!
+
 n = [i * 1000 for i in range(1, 11)]
 edges_percent = 0.1
 t = []

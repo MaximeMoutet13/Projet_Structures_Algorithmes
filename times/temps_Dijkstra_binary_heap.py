@@ -6,6 +6,8 @@ n = [i * 1000 for i in range(1, 11)]
 t_Dijkstra = []
 t_Generate = []
 
+# Renommer l'image enregistrée avant de lancer le programme !!
+
 for i, node in enumerate(n):
     print("Etape:", i)
     t0 = process_time()

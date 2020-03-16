@@ -148,11 +148,11 @@ class DirectedGraph:
         """
             returns the path from the Dijkstra algorithm to t
         """
-        path = [t]
         u = t
         while pred[u] != None:
             path = [u] + path
             u = pred[u]
+        path = [u] + path
         return path
 
     def Dijkstra_binary_heap(self, u):
